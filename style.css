@@ -1,0 +1,205 @@
+/* ===== Reset & Base ===== */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --green:  #22c55e;
+  --red:    #ef4444;
+  --blue:   #3b82f6;
+  --bg:     #f1f5f9;
+  --surface: #ffffff;
+  --border: #e2e8f0;
+  --text:   #1e293b;
+  --muted:  #64748b;
+  --radius: 12px;
+  --shadow: 0 2px 12px rgba(0,0,0,.07);
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+}
+
+/* ===== Header ===== */
+header {
+  background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
+  color: #fff;
+  text-align: center;
+  padding: 2.5rem 1rem 2rem;
+}
+header h1 { font-size: 2rem; font-weight: 700; letter-spacing: -.5px; }
+.subtitle  { color: #94a3b8; margin-top: .25rem; }
+
+/* ===== Main Layout ===== */
+main {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+/* ===== Summary Cards ===== */
+.summary {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+}
+.card {
+  background: var(--surface);
+  border-radius: var(--radius);
+  padding: 1.5rem;
+  box-shadow: var(--shadow);
+  display: flex;
+  flex-direction: column;
+  gap: .4rem;
+}
+.card-label  { font-size: .8rem; font-weight: 600; text-transform: uppercase; letter-spacing: .05em; color: var(--muted); }
+.card-amount { font-size: 1.9rem; font-weight: 700; }
+.income-card   .card-amount { color: var(--green); }
+.expenses-card .card-amount { color: var(--red);   }
+.balance-card  .card-amount { color: var(--blue);  }
+.balance-card.negative .card-amount { color: var(--red); }
+
+/* ===== Section Box ===== */
+.section-box {
+  background: var(--surface);
+  border-radius: var(--radius);
+  padding: 1.5rem;
+  box-shadow: var(--shadow);
+}
+.section-box h2 {
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  padding-bottom: .6rem;
+  border-bottom: 2px solid var(--border);
+}
+
+/* ===== Period ===== */
+.period-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .75rem;
+  align-items: flex-end;
+}
+.period-row .form-group { flex: 1; min-width: 150px; }
+.period-display { margin-top: .75rem; color: var(--muted); font-size: .9rem; }
+
+/* ===== Two-column ===== */
+.two-col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+}
+
+/* ===== Forms ===== */
+.form-group { display: flex; flex-direction: column; gap: .3rem; margin-bottom: .75rem; }
+.form-group label { font-size: .82rem; font-weight: 600; color: var(--muted); }
+.form-group input,
+.form-group select {
+  border: 1.5px solid var(--border);
+  border-radius: 8px;
+  padding: .55rem .75rem;
+  font-size: .95rem;
+  color: var(--text);
+  background: var(--bg);
+  transition: border-color .15s;
+  width: 100%;
+}
+.form-group input:focus,
+.form-group select:focus {
+  outline: none;
+  border-color: var(--blue);
+  background: #fff;
+}
+
+/* ===== Buttons ===== */
+.btn {
+  padding: .6rem 1.2rem;
+  border: none;
+  border-radius: 8px;
+  font-size: .9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: opacity .15s, transform .1s;
+}
+.btn:hover   { opacity: .9; }
+.btn:active  { transform: scale(.97); }
+.btn-income   { background: var(--green); color: #fff; width: 100%; margin-top: .25rem; }
+.btn-expense  { background: var(--red);   color: #fff; width: 100%; margin-top: .25rem; }
+.btn-secondary { background: #475569; color: #fff; white-space: nowrap; }
+.btn-danger   { background: #dc2626; color: #fff; }
+
+/* ===== Entry Lists ===== */
+.entry-list {
+  list-style: none;
+  margin-top: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: .5rem;
+}
+.entry-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: var(--bg);
+  border-radius: 8px;
+  padding: .6rem .9rem;
+  font-size: .9rem;
+  gap: .5rem;
+}
+.entry-info { display: flex; flex-direction: column; flex: 1; }
+.entry-name { font-weight: 600; }
+.entry-meta { font-size: .75rem; color: var(--muted); }
+.entry-amount { font-weight: 700; white-space: nowrap; }
+.entry-amount.income-amt  { color: var(--green); }
+.entry-amount.expense-amt { color: var(--red);   }
+.delete-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #94a3b8;
+  font-size: 1rem;
+  padding: 0 .2rem;
+  transition: color .15s;
+}
+.delete-btn:hover { color: var(--red); }
+
+/* ===== Category Breakdown ===== */
+.breakdown-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: .75rem;
+  margin-top: .5rem;
+}
+.cat-tile {
+  background: var(--bg);
+  border-radius: 10px;
+  padding: .9rem 1rem;
+}
+.cat-name   { font-size: .8rem; font-weight: 700; color: var(--muted); text-transform: uppercase; }
+.cat-amount { font-size: 1.25rem; font-weight: 700; color: var(--red); margin-top: .2rem; }
+.cat-bar-wrap { background: var(--border); border-radius: 99px; height: 5px; margin-top: .5rem; }
+.cat-bar { height: 5px; border-radius: 99px; background: var(--red); transition: width .4s; }
+.empty-msg { color: var(--muted); font-size: .9rem; }
+
+/* ===== Reset Row ===== */
+.reset-row { text-align: center; }
+
+/* ===== Footer ===== */
+footer {
+  text-align: center;
+  padding: 1.5rem;
+  color: var(--muted);
+  font-size: .82rem;
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 700px) {
+  .summary   { grid-template-columns: 1fr; }
+  .two-col   { grid-template-columns: 1fr; }
+  .period-row { flex-direction: column; }
+}

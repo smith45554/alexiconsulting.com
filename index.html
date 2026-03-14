@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Family Budget</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header>
+    <h1>Family Budget</h1>
+    <p class="subtitle">Track your money. Know what you can spend.</p>
+  </header>
+
+  <main>
+    <!-- Summary Cards -->
+    <section class="summary">
+      <div class="card income-card">
+        <span class="card-label">Total Income</span>
+        <span class="card-amount" id="total-income">$0.00</span>
+      </div>
+      <div class="card expenses-card">
+        <span class="card-label">Total Expenses</span>
+        <span class="card-amount" id="total-expenses">$0.00</span>
+      </div>
+      <div class="card balance-card">
+        <span class="card-label">Available to Spend</span>
+        <span class="card-amount" id="balance">$0.00</span>
+      </div>
+    </section>
+
+    <!-- Budget Period -->
+    <section class="section-box">
+      <h2>Budget Period</h2>
+      <div class="period-row">
+        <div class="form-group">
+          <label for="period-label">Label (e.g. March 2026)</label>
+          <input type="text" id="period-label" placeholder="March 2026" />
+        </div>
+        <div class="form-group">
+          <label for="period-start">Start Date</label>
+          <input type="date" id="period-start" />
+        </div>
+        <div class="form-group">
+          <label for="period-end">End Date</label>
+          <input type="date" id="period-end" />
+        </div>
+        <button class="btn btn-secondary" onclick="savePeriod()">Save Period</button>
+      </div>
+      <p id="period-display" class="period-display"></p>
+    </section>
+
+    <!-- Two-column layout -->
+    <div class="two-col">
+
+      <!-- Income -->
+      <section class="section-box">
+        <h2>Income</h2>
+        <form id="income-form" onsubmit="addIncome(event)">
+          <div class="form-group">
+            <label for="income-source">Source</label>
+            <input type="text" id="income-source" placeholder="e.g. Salary, Freelance" required />
+          </div>
+          <div class="form-group">
+            <label for="income-amount">Amount ($)</label>
+            <input type="number" id="income-amount" placeholder="0.00" min="0" step="0.01" required />
+          </div>
+          <div class="form-group">
+            <label for="income-frequency">Frequency</label>
+            <select id="income-frequency">
+              <option value="monthly">Monthly</option>
+              <option value="biweekly">Bi-weekly</option>
+              <option value="weekly">Weekly</option>
+              <option value="once">One-time</option>
+            </select>
+          </div>
+          <button type="submit" class="btn btn-income">+ Add Income</button>
+        </form>
+        <ul class="entry-list" id="income-list"></ul>
+      </section>
+
+      <!-- Expenses -->
+      <section class="section-box">
+        <h2>Expenses</h2>
+        <form id="expense-form" onsubmit="addExpense(event)">
+          <div class="form-group">
+            <label for="expense-name">Description</label>
+            <input type="text" id="expense-name" placeholder="e.g. Rent, Groceries" required />
+          </div>
+          <div class="form-group">
+            <label for="expense-amount">Amount ($)</label>
+            <input type="number" id="expense-amount" placeholder="0.00" min="0" step="0.01" required />
+          </div>
+          <div class="form-group">
+            <label for="expense-category">Category</label>
+            <select id="expense-category">
+              <option value="Housing">Housing</option>
+              <option value="Food">Food</option>
+              <option value="Transport">Transport</option>
+              <option value="Utilities">Utilities</option>
+              <option value="Healthcare">Healthcare</option>
+              <option value="Education">Education</option>
+              <option value="Entertainment">Entertainment</option>
+              <option value="Clothing">Clothing</option>
+              <option value="Savings">Savings</option>
+              <option value="Other">Other</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="expense-frequency">Frequency</label>
+            <select id="expense-frequency">
+              <option value="monthly">Monthly</option>
+              <option value="biweekly">Bi-weekly</option>
+              <option value="weekly">Weekly</option>
+              <option value="once">One-time</option>
+            </select>
+          </div>
+          <button type="submit" class="btn btn-expense">+ Add Expense</button>
+        </form>
+        <ul class="entry-list" id="expense-list"></ul>
+      </section>
+
+    </div>
+
+    <!-- Breakdown by Category -->
+    <section class="section-box">
+      <h2>Spending Breakdown</h2>
+      <div id="category-breakdown" class="breakdown-grid"></div>
+    </section>
+
+    <!-- Reset -->
+    <div class="reset-row">
+      <button class="btn btn-danger" onclick="confirmReset()">Reset All Data</button>
+    </div>
+  </main>
+
+  <footer>
+    <p>Data is saved locally in your browser. &copy; <span id="year"></span> Alexi Consulting</p>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
