@@ -16,7 +16,7 @@ html {
 }
 
 body {
-  font-family: -apple-system, BlinkMacSystemFont, "PT Sans", "Segoe UI",
+  font-family: "PT Sans", -apple-system, BlinkMacSystemFont, "Segoe UI",
     "Helvetica Neue", Arial, sans-serif;
   font-size: 1rem;
   line-height: 1.65;
@@ -192,11 +192,22 @@ ul {
 }
 
 .author-name {
-  font-size: 1.05rem;
+  font-size: 1.1rem;
   font-weight: 700;
   color: #3d4144;
-  margin-bottom: 0.3rem;
+  margin-bottom: 0.2rem;
   line-height: 1.3;
+}
+
+.author-title {
+  font-size: 0.82rem;
+  color: #3d4144;
+  margin-bottom: 0.35rem;
+  line-height: 1.45;
+}
+
+.author-employer {
+  color: #6f777d;
 }
 
 .author-bio {
@@ -489,6 +500,7 @@ ul {
   }
 
   .author-name,
+  .author-title,
   .author-bio,
   .author-location {
     text-align: left;
