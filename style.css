@@ -163,6 +163,7 @@ hr {
   list-style: none;
   margin: 0;
   padding: 0;
+  align-items: center;
 }
 
 .masthead__menu-item {
@@ -172,7 +173,7 @@ hr {
 
 .masthead__menu-item a {
   display: block;
-  padding: 0.25em;
+  padding: 0.25em 0.5em;
   color: var(--text-color);
   font-size: 0.875em;   /* $type-size-5 ≈ 14px */
   font-weight: bold;
@@ -183,11 +184,14 @@ hr {
   text-decoration: none;
 }
 
-/* site title — first list item */
+/* Site title — pushes all nav items to the right */
+.masthead__menu-item--lg {
+  margin-right: auto;
+}
 .masthead__menu-item--lg a {
   font-size: 1.25em;
   font-weight: bold;
-  margin-right: 1rem;
+  padding-left: 0;
 }
 
 /* Hidden-links dropdown (mobile overflow) */
@@ -500,6 +504,11 @@ hr {
 .page__content {
   font-size: 1em;
   line-height: 1.65;
+}
+
+/* Offset anchor targets so sticky masthead doesn't cover them */
+#about, #news, #projects, #writing, #blog, #cv {
+  scroll-margin-top: calc(var(--masthead-height) + 1em);
 }
 
 .page__content p { margin-bottom: 1.3em; }
