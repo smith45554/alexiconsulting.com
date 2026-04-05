@@ -3,141 +3,312 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Family Budget</title>
+  <title>Alexi McHugh</title>
+  <meta name="description" content="Public Service · Technology Modernization · AI Governance" />
   <link rel="stylesheet" href="style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=PT+Sans:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet" />
 </head>
 <body>
-  <header>
-    <h1>Family Budget</h1>
-    <p class="subtitle">Track your money. Know what you can spend.</p>
-  </header>
 
-  <main>
-    <!-- Summary Cards -->
-    <section class="summary">
-      <div class="card income-card">
-        <span class="card-label">Total Income</span>
-        <span class="card-amount" id="total-income">$0.00</span>
-      </div>
-      <div class="card expenses-card">
-        <span class="card-label">Total Expenses</span>
-        <span class="card-amount" id="total-expenses">$0.00</span>
-      </div>
-      <div class="card balance-card">
-        <span class="card-label">Available to Spend</span>
-        <span class="card-amount" id="balance">$0.00</span>
-      </div>
-    </section>
-
-    <!-- Budget Period -->
-    <section class="section-box">
-      <h2>Budget Period</h2>
-      <div class="period-row">
-        <div class="form-group">
-          <label for="period-label">Label (e.g. March 2026)</label>
-          <input type="text" id="period-label" placeholder="March 2026" />
-        </div>
-        <div class="form-group">
-          <label for="period-start">Start Date</label>
-          <input type="date" id="period-start" />
-        </div>
-        <div class="form-group">
-          <label for="period-end">End Date</label>
-          <input type="date" id="period-end" />
-        </div>
-        <button class="btn btn-secondary" onclick="savePeriod()">Save Period</button>
-      </div>
-      <p id="period-display" class="period-display"></p>
-    </section>
-
-    <!-- Two-column layout -->
-    <div class="two-col">
-
-      <!-- Income -->
-      <section class="section-box">
-        <h2>Income</h2>
-        <form id="income-form" onsubmit="addIncome(event)">
-          <div class="form-group">
-            <label for="income-source">Source</label>
-            <input type="text" id="income-source" placeholder="e.g. Salary, Freelance" required />
-          </div>
-          <div class="form-group">
-            <label for="income-amount">Amount ($)</label>
-            <input type="number" id="income-amount" placeholder="0.00" min="0" step="0.01" required />
-          </div>
-          <div class="form-group">
-            <label for="income-frequency">Frequency</label>
-            <select id="income-frequency">
-              <option value="monthly">Monthly</option>
-              <option value="biweekly">Bi-weekly</option>
-              <option value="weekly">Weekly</option>
-              <option value="once">One-time</option>
-            </select>
-          </div>
-          <button type="submit" class="btn btn-income">+ Add Income</button>
-        </form>
-        <ul class="entry-list" id="income-list"></ul>
-      </section>
-
-      <!-- Expenses -->
-      <section class="section-box">
-        <h2>Expenses</h2>
-        <form id="expense-form" onsubmit="addExpense(event)">
-          <div class="form-group">
-            <label for="expense-name">Description</label>
-            <input type="text" id="expense-name" placeholder="e.g. Rent, Groceries" required />
-          </div>
-          <div class="form-group">
-            <label for="expense-amount">Amount ($)</label>
-            <input type="number" id="expense-amount" placeholder="0.00" min="0" step="0.01" required />
-          </div>
-          <div class="form-group">
-            <label for="expense-category">Category</label>
-            <select id="expense-category">
-              <option value="Housing">Housing</option>
-              <option value="Food">Food</option>
-              <option value="Transport">Transport</option>
-              <option value="Utilities">Utilities</option>
-              <option value="Healthcare">Healthcare</option>
-              <option value="Education">Education</option>
-              <option value="Entertainment">Entertainment</option>
-              <option value="Clothing">Clothing</option>
-              <option value="Savings">Savings</option>
-              <option value="Other">Other</option>
-            </select>
-          </div>
-          <div class="form-group">
-            <label for="expense-frequency">Frequency</label>
-            <select id="expense-frequency">
-              <option value="monthly">Monthly</option>
-              <option value="biweekly">Bi-weekly</option>
-              <option value="weekly">Weekly</option>
-              <option value="once">One-time</option>
-            </select>
-          </div>
-          <button type="submit" class="btn btn-expense">+ Add Expense</button>
-        </form>
-        <ul class="entry-list" id="expense-list"></ul>
-      </section>
-
+  <!-- Masthead -->
+  <div class="masthead">
+    <div class="masthead__inner">
+      <a href="/" class="site-title">Alexi McHugh</a>
+      <nav class="masthead__nav">
+        <ul>
+          <li><a href="#about">About</a></li>
+          <li><a href="#projects">Projects &amp; Work</a></li>
+          <li><a href="#writing">Writing</a></li>
+          <li><a href="#blog">Blog</a></li>
+          <li><a href="#cv">CV</a></li>
+        </ul>
+      </nav>
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">&#9776;</button>
     </div>
+    <nav class="masthead__nav--mobile" id="mobileNav">
+      <ul>
+        <li><a href="#about">About</a></li>
+        <li><a href="#projects">Projects &amp; Work</a></li>
+        <li><a href="#writing">Writing</a></li>
+        <li><a href="#blog">Blog</a></li>
+        <li><a href="#cv">CV</a></li>
+      </ul>
+    </nav>
+  </div>
 
-    <!-- Breakdown by Category -->
-    <section class="section-box">
-      <h2>Spending Breakdown</h2>
-      <div id="category-breakdown" class="breakdown-grid"></div>
-    </section>
+  <!-- Page wrapper -->
+  <div class="page-wrapper">
 
-    <!-- Reset -->
-    <div class="reset-row">
-      <button class="btn btn-danger" onclick="confirmReset()">Reset All Data</button>
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <div class="author-profile">
+        <div class="author-avatar author-avatar--initials" aria-label="Alexi McHugh">AM</div>
+        <h3 class="author-name">Alexi McHugh, MPH, MPA(c)</h3>
+        <p class="author-bio">Public Service · Technology Modernization · AI Governance</p>
+        <p class="author-location">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="14" height="14"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          Washington, D.C.
+        </p>
+        <div class="author-links">
+          <a href="mailto:Alexi.McHugh@Gmail.com" class="author-link" title="Email">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            Alexi.McHugh@Gmail.com
+          </a>
+          <a href="https://www.linkedin.com/in/aleximchugh/" class="author-link" title="LinkedIn" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+            LinkedIn
+          </a>
+          <a href="https://alexi255.substack.com/" class="author-link" title="Substack" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M22.539 8.242H1.46V5.406h21.08v2.836zM1.46 10.812V24L12 18.11 22.54 24V10.812H1.46zM22.54 0H1.46v2.836h21.08V0z"/></svg>
+            Substack
+          </a>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Main content -->
+    <main class="main-content">
+      <article class="page-content">
+
+        <section id="about">
+          <p>
+            I am a <strong>Program Support Specialist at the
+            <a href="https://www.fws.gov" target="_blank" rel="noopener">U.S. Fish &amp; Wildlife Service</a></strong>,
+            building the tools and governance frameworks that help federal employees work smarter with AI.
+            I founded FWS&rsquo;s first multi-region AI Collaboration Hub and have spent the past several years
+            at the intersection of public service, technology modernization, and responsible AI deployment.
+          </p>
+
+          <p>
+            Before FWS, I served as a Federal Communications Consultant for the
+            <a href="https://www.nps.gov" target="_blank" rel="noopener">National Park Service</a> Office of
+            Native American Affairs, supported climate change education at the
+            <a href="https://www.fs.usda.gov" target="_blank" rel="noopener">U.S. Forest Service</a>,
+            and spent three years as an Interpretive Park Ranger in Washington, D.C. Earlier roles include
+            an AmeriCorps RARE fellowship in Eastern Oregon and health policy research at the Schuyler Center
+            for Analysis and Advocacy in Albany, NY.
+          </p>
+
+          <p>
+            I hold an <strong>MPH in Health Policy</strong> from The George Washington University and
+            a <strong>BA in Public Health</strong> (with honors) from the University of South Carolina,
+            where I was named an Outstanding Senior. I am currently completing an
+            <strong>MPA in Public Management</strong> at Indiana University&rsquo;s O&rsquo;Neill School
+            of Public &amp; Environmental Affairs (Expected 2027).
+          </p>
+
+          <p>
+            Outside of work, I enjoy spending time on public lands and hiking, international travel,
+            horses and equine therapy, and environmental conservation.
+          </p>
+        </section>
+
+        <!-- News / Recent -->
+        <section id="news" class="news-section">
+          <h2>Recent</h2>
+          <ul class="news-list">
+            <li>
+              <span class="news-date">2025</span>
+              <span>Recognized by the DOI Chief Records Officer for AI Collaboration Hub work at U.S. Fish &amp; Wildlife Service.</span>
+            </li>
+            <li>
+              <span class="news-date">2025</span>
+              <span>Led <em>ES Spotlight: AI Tools &amp; the AI Collaboration Hub</em> presentation to ~200 FWS Region 1 employees.</span>
+            </li>
+            <li>
+              <span class="news-date">2024</span>
+              <span>Founded FWS&rsquo;s first multi-region AI Collaboration Hub; built SharePoint architecture and facilitated training for 200+ employees.</span>
+            </li>
+            <li>
+              <span class="news-date">2024</span>
+              <span>Presented at the NAI Midwest Regional Conference: <em>Intersecting Narratives</em> and <em>DEI and the Outdoors</em>.</span>
+            </li>
+            <li>
+              <span class="news-date">2024</span>
+              <span>Federal Communications Consultant, National Park Service Office of Native American Affairs.</span>
+            </li>
+            <li>
+              <span class="news-date">2022</span>
+              <span>Completed Organizational Behavior Certificate (Harvard Extension School) and Diversity &amp; Inclusion Certificate (eCornell).</span>
+            </li>
+          </ul>
+        </section>
+
+        <!-- Projects -->
+        <section id="projects" class="page-section">
+          <h2>Projects &amp; Work</h2>
+          <ul class="pub-list">
+
+            <li class="pub-item">
+              <div class="pub-title">Multi-Region AI Collaboration Hub</div>
+              <div class="pub-authors">U.S. Fish &amp; Wildlife Service &mdash; Founded &amp; Lead</div>
+              <div class="pub-desc">
+                FWS&rsquo;s first cross-regional AI community of practice. Built SharePoint architecture,
+                facilitated training for 200+ employees, and established governance standards.
+                Recognized by the DOI Chief Records Officer.
+              </div>
+            </li>
+
+            <li class="pub-item">
+              <div class="pub-title">Original AI Governance Frameworks</div>
+              <div class="pub-authors">U.S. Fish &amp; Wildlife Service</div>
+              <div class="pub-desc">
+                Designed seven frameworks for responsible government AI use:
+                <strong>COACH, PROMPT, SAFE, THINK, CLEAR, SPARK,</strong> and <strong>LIFT</strong>.
+                Adopted across multiple FWS regions.
+              </div>
+            </li>
+
+            <li class="pub-item">
+              <div class="pub-title">Microsoft Copilot Enterprise Rollout</div>
+              <div class="pub-authors">U.S. Fish &amp; Wildlife Service &mdash; Lead</div>
+              <div class="pub-desc">
+                Led end-to-end deployment including enablement guides, integration controls,
+                a Prompt Library with hundreds of role-ready prompts across 12 functional areas,
+                and hands-on employee training.
+              </div>
+            </li>
+
+            <li class="pub-item">
+              <div class="pub-title">UNDP Armenia MEL Plan</div>
+              <div class="pub-authors">UNDP &amp; Armenian SDG Innovation Lab</div>
+              <div class="pub-desc">
+                Collaborated with UNDP and the Armenian SDG Innovation Lab to design monitoring,
+                evaluation, and learning metrics for sustainable development policies.
+              </div>
+            </li>
+
+          </ul>
+        </section>
+
+        <!-- Writing / Presentations -->
+        <section id="writing" class="page-section">
+          <h2>Writing &amp; Presentations</h2>
+          <ul class="pub-list">
+
+            <li class="pub-item">
+              <div class="pub-title">ES Spotlight: AI Tools &amp; the AI Collaboration Hub</div>
+              <div class="pub-venue"><em>U.S. Fish &amp; Wildlife Service, Region 1 &mdash; 2025</em></div>
+            </li>
+
+            <li class="pub-item">
+              <div class="pub-title">Intersecting Narratives: Fostering Inclusivity, Leading Edge Program Design, and Well-being in Interpretation</div>
+              <div class="pub-venue"><em>NAI Midwest Regional Conference &mdash; 2024</em></div>
+            </li>
+
+            <li class="pub-item">
+              <div class="pub-title">DEI and the Outdoors</div>
+              <div class="pub-venue"><em>NAI Midwest Conference &mdash; 2024</em></div>
+            </li>
+
+            <li class="pub-item">
+              <div class="pub-title">Work and Wellbeing: An Intervention Aimed at Empowering Employees, Addressing Under-Performance, and Improving Engagement within the National Park Service</div>
+              <div class="pub-venue"><em>Harvard Extension School &mdash; 2021</em></div>
+            </li>
+
+            <li class="pub-item">
+              <div class="pub-title">Careers in the National Park Service for Relevance, Diversity, and Inclusion</div>
+              <div class="pub-venue"><em>Harvard Extension School &mdash; 2021</em></div>
+            </li>
+
+          </ul>
+        </section>
+
+        <!-- Blog -->
+        <section id="blog" class="page-section">
+          <h2>Blog</h2>
+          <p>
+            <strong>Bridging AI Policy &amp; Practice</strong> &mdash; Writing about what AI governance
+            actually looks like when it hits the operational level in government. Published on Substack.
+          </p>
+          <p>
+            <a href="https://alexi255.substack.com/" class="btn-link" target="_blank" rel="noopener">
+              Read on Substack &rarr;
+            </a>
+          </p>
+        </section>
+
+        <!-- CV -->
+        <section id="cv" class="page-section">
+          <h2>CV</h2>
+
+          <h3 class="cv-heading">Education</h3>
+          <ul class="cv-list">
+            <li>
+              <strong>MPA, Public Management</strong> &mdash; Indiana University, O&rsquo;Neill School of Public &amp; Environmental Affairs
+              <span class="cv-meta">Expected 2027 &middot; GPA 3.67</span>
+            </li>
+            <li>
+              <strong>MPH, Health Policy</strong> &mdash; The George Washington University
+              <span class="cv-meta">2017 &middot; GPA 3.74</span>
+            </li>
+            <li>
+              <strong>BA, Public Health</strong> &mdash; University of South Carolina, Honors College
+              <span class="cv-meta">2015 &middot; GPA 3.84 &middot; USC Outstanding Senior</span>
+            </li>
+            <li>
+              <strong>Organizational Behavior Certificate</strong> &mdash; Harvard Extension School
+              <span class="cv-meta">2022</span>
+            </li>
+            <li>
+              <strong>Diversity &amp; Inclusion Certificate</strong> &mdash; eCornell, Cornell University
+              <span class="cv-meta">2022</span>
+            </li>
+          </ul>
+
+          <h3 class="cv-heading">Experience</h3>
+          <ul class="cv-list">
+            <li>
+              <strong>Program Support Specialist</strong> &mdash; U.S. Fish &amp; Wildlife Service
+              <span class="cv-meta">2025&ndash;Present</span>
+            </li>
+            <li>
+              <strong>Federal Communications Consultant</strong> &mdash; National Park Service, Office of Native American Affairs
+              <span class="cv-meta">2024</span>
+            </li>
+            <li>
+              <strong>Climate Change Education &amp; Training Support</strong> &mdash; U.S. Forest Service
+              <span class="cv-meta">2024</span>
+            </li>
+            <li>
+              <strong>Interpretive Park Ranger</strong> &mdash; National Park Service, Washington, D.C.
+              <span class="cv-meta">2020&ndash;2023</span>
+            </li>
+            <li>
+              <strong>Program Coordinator, RARE AmeriCorps</strong> &mdash; Eastern Oregon
+              <span class="cv-meta">2018&ndash;2019</span>
+            </li>
+            <li>
+              <strong>Research Associate</strong> &mdash; Schuyler Center for Analysis and Advocacy, Albany, NY
+              <span class="cv-meta">2017&ndash;2018</span>
+            </li>
+          </ul>
+
+        </section>
+
+      </article>
+    </main>
+
+  </div><!-- end .page-wrapper -->
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="site-footer__inner">
+      <p>&copy; <span id="year"></span> Alexi McHugh &middot;
+        <a href="mailto:Alexi.McHugh@Gmail.com">Alexi.McHugh@Gmail.com</a> &middot;
+        <a href="https://alexi255.substack.com/" target="_blank" rel="noopener">Substack</a>
+      </p>
     </div>
-  </main>
-
-  <footer>
-    <p>Data is saved locally in your browser. &copy; <span id="year"></span> Alexi Consulting</p>
   </footer>
 
-  <script src="app.js"></script>
+  <script>
+    document.getElementById('navToggle').addEventListener('click', function () {
+      document.getElementById('mobileNav').classList.toggle('is-visible');
+    });
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+
 </body>
 </html>
